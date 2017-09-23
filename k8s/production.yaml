@@ -1,0 +1,40 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: reverse-proxy
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: reverse-proxy
+      labels:
+        app: reverse-proxy
+        role: reverse-proxy
+        env: production
+    spec:
+      containers:
+      - name: reverse-proxy
+#Image tag is changed by Jenkins during build
+        image: <IMAGE_TAG_DO_NOT_EDIT>
+#        readinessProbe:
+#          httpGet:
+#            path: /health
+#            port: 80
+        ports:
+        - name: http
+          containerPort: 3001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reverse-proxy-service
+spec:
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 80
+    targetPort: 3001
+    protocol: TCP
+  selector:
+    app: reverse-proxy
+    role: reverse-proxy
