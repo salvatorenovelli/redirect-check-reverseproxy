@@ -20,11 +20,14 @@ podTemplate(label: 'mypod', containers: [
             }
         }
 
+
+    }
+    node {
         stage('Build Docker') {
 
-            container('node') {
-                sh("docker build docker -t ${imageTag}")
-            }
+            sh 'pwd'
+            sh 'ls -lah'
+            sh("docker build docker -t ${imageTag}")
 
         }
     }
