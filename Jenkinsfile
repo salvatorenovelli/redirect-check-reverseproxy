@@ -66,5 +66,13 @@ podTemplate(label: 'mypod', containers: [
                 throw e
             }
         }
+
+        stage('Run node') {
+            steps {
+                container('node') {
+                    sh 'yarn --version'
+                }
+            }
+        }
     }
 }
