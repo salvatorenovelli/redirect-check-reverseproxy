@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        kubernetes {
+        jnlp {
             //cloud 'kubernetes'
             label 'mypod'
             containerTemplate {
