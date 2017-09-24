@@ -41,35 +41,30 @@ podTemplate(label: 'mypod', containers: [
 ]) {
     node('mypod') {
 
-        stage('Run maven') {
-            steps {
+//        stage('Run maven') {
+//            steps {
+//                container('maven') {
+//                    sh 'mvn -version'
+//                }
+//            }
+//        }
+//        stage('Run node') {
+//            steps {
+//                container('node') {
+//                    sh 'yarn --version'
+//                }
+//            }
+//        }
+
+        stage('Integration Test') {
+            try {
                 container('maven') {
                     sh 'mvn -version'
                 }
+            } catch (Exception e) {
+                containerLog 'mongo'
+                throw e
             }
         }
-        stage('Run node') {
-            steps {
-                container('node') {
-                    sh 'yarn --version'
-                }
-            }
-        }
-
-//        stage('Integration Test') {
-//            try {
-//                container('maven') {
-//                    sh 'nc -z localhost:27017 && echo "connected to mongo db"'
-//                    // sh 'mvn -B clean failsafe:integration-test' // real integration test
-//
-//                    def mongoLog = containerLog(name: 'mongo', returnLog: true, tailingLines: 5, sinceSeconds: 20, limitBytes: 50000)
-//                    assert mongoLog.contains('connection accepted from 127.0.0.1:')
-//                    sh 'echo failing build; false'
-//                }
-//            } catch (Exception e) {
-//                containerLog 'mongo'
-//                throw e
-//            }
-//        }
     }
 }
