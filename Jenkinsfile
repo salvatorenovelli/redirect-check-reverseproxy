@@ -61,6 +61,9 @@ podTemplate(label: 'mypod', containers: [
                 container('maven') {
                     sh 'mvn -version'
                 }
+                container('node') {
+                    sh 'yarn --version'
+                }
             } catch (Exception e) {
                 containerLog 'mongo'
                 throw e
