@@ -9,6 +9,12 @@ pipeline {
                 ttyEnabled true
                 command 'cat'
             }
+            containerTemplate {
+                name 'node'
+                image 'node:8.5.0-alpine'
+                ttyEnabled true
+                command 'cat'
+            }
         }
     }
     stages {
@@ -16,6 +22,13 @@ pipeline {
             steps {
                 container('maven') {
                     sh 'mvn -version'
+                }
+            }
+        }
+        stage('Run node') {
+            steps {
+                container('node') {
+                    sh 'yarn --version'
                 }
             }
         }
