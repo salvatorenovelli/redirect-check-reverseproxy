@@ -4,15 +4,13 @@ podTemplate(label: 'mypod', containers: [
 ]) {
     node('mypod') {
 
+        def project = 'redirect-check-180020'
+        def appName = 'redirect-check-reverseproxy'
+        def svcName = "${appName}-service"
+        def imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+
         stage('Build Project') {
             container('node') {
-
-                def project = 'redirect-check-180020'
-                def appName = 'redirect-check-reverseproxy'
-
-                def svcName = "${appName}-service"
-
-                def imageTag = "gcr.io/${project}/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
                 checkout scm
 
@@ -23,14 +21,11 @@ podTemplate(label: 'mypod', containers: [
         }
 
         stage('Build Docker') {
-            try {
-                container('node') {
-                    sh("docker build docker -t ${imageTag}")
-                }
-            } catch (Exception e) {
-                containerLog 'mongo'
-                throw e
+
+            container('node') {
+                sh("docker build docker -t ${imageTag}")
             }
+
         }
     }
 }
