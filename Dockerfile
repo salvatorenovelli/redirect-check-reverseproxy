@@ -8,6 +8,8 @@ ENV NPM_CONFIG_LOGLEVEL warn
 # Copy all local files into the image.
 COPY . .
 
+RUN npm install
+
 # Set the command to start the node server.
 CMD node Server.js
 
