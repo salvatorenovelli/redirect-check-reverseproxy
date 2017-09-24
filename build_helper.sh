@@ -8,8 +8,6 @@ export ARTIFACT_ID=`jq -r '.name' package.json`
 export IMAGE_TAG=gcr.io/${PROJECT_ID}/${ARTIFACT_ID}:${VERSION}
 
 
-
-
 if [ -z "$1" ]
   then
     echo "No argument supplied"
@@ -19,7 +17,6 @@ fi
 
 case $1 in
     "build" )
-        npm i
         echo "Building ${IMAGE_TAG}"
         docker build -t ${IMAGE_TAG} .
     ;;
