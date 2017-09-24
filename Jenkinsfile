@@ -6,6 +6,8 @@ podTemplate(label: 'mypod', containers: [
 
         stage('Build Project') {
             container('node') {
+                sh 'pwd'
+                sh 'ls -lah'
                 sh 'npm install'
             }
         }
