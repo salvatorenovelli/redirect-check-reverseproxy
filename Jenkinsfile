@@ -68,10 +68,13 @@ podTemplate(label: 'mypod', containers: [
         }
 
         stage('Run node') {
-            steps {
+            try {
                 container('node') {
                     sh 'yarn --version'
                 }
+            } catch (Exception e) {
+                containerLog 'mongo'
+                throw e
             }
         }
     }
