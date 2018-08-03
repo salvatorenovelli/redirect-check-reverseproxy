@@ -33,7 +33,7 @@ app.all("/health", function (req, res) {
 });
 
 app.all("/api/*", function (req, res) {
-    console.log('redirecting ' + req.originalUrl + ' to backend');
+    //console.log('redirecting ' + req.originalUrl + ' to backend');
     apiProxy.web(req, res, {target: backend});
 });
 
@@ -45,7 +45,7 @@ app.ws('*', function (ws, req) {
 });
 
 app.all("*", function (req, res) {
-    console.log('redirecting ' + req.originalUrl + ' to frontend');
+    //console.log('redirecting ' + req.originalUrl + ' to frontend');
     apiProxy.web(req, res, {target: frontend});
 });
 
