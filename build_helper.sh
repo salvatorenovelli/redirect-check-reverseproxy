@@ -1,11 +1,11 @@
 #!/bin/sh
 
 
-export PROJECT_ID=redirect-check-180020
+export PROJECT_ID=my-seo-buddy
 export VERSION=`jq -r '.version' package.json`
 export ARTIFACT_ID=`jq -r '.name' package.json`
 
-export IMAGE_TAG=gcr.io/${PROJECT_ID}/${ARTIFACT_ID}:${VERSION}
+export IMAGE_TAG=eu.gcr.io/${PROJECT_ID}/${ARTIFACT_ID}:${VERSION}
 
 
 if [ -z "$1" ]

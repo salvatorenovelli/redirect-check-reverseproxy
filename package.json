@@ -1,15 +1,13 @@
 {
-  "name": "reverse-proxy",
-  "version": "1.0.1",
+  "name": "redirect-check-reverse-proxy",
+  "version": "1.0.2",
   "description": "",
   "main": "Server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "dns": "^0.2.2",
     "express": "^4.15.3",
-    "express-ws": "^3.0.0",
     "http-proxy": "^1.16.2"
   },
   "author": "",
